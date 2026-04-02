@@ -1,0 +1,51 @@
+STAGE 2 REPORT SUMMARY
+Base snapshot: payments.xyz-labs.xyz-main.zip
+Intent: additive GitHub-ready filesystem only; no business logic implemented.
+
+NEW MODULE ROOT
+/payme-checkout-engine
+
+NEW FILES
+- components/PayMeCheckout.tsx
+- components/PaymentRequestCard.tsx
+- components/CouponField.tsx
+- components/PoweredByPayMe.tsx
+- admin/settings.tsx
+- admin/payment-requests.tsx
+- admin/coupons.tsx
+- config/products.ts
+- config/branding.ts
+- lib/stripe.ts
+- lib/usdc.ts
+- lib/crm.ts
+- lib/coupons.ts
+- types/checkout.ts
+- types/coupon.ts
+- types/customer.ts
+- types/payment-request.ts
+- pages/api/coupons/validate.ts
+- pages/api/coupons/index.ts
+- docs/README.md
+
+REUSED EXISTING BASE ASSETS TO REFERENCE
+- src/services/usdcTransfer.js -> candidate source for lib/usdc.ts behavior mapping
+- src/services/adminStore.js -> candidate admin state/store seam
+- src/components/PaymentCard.jsx -> candidate UI pattern for PaymentRequestCard
+- src/pages/AdminPanel.jsx -> candidate admin IA/source for settings/payment requests/coupons
+- src/config/constants.js + src/config/api.js -> candidate source values to migrate into config/*
+- src/services/paymentsApi.js -> candidate API shim for future adapter routing
+
+MODIFIED FILES
+- none in base snapshot; structure added as isolated layer to reduce merge risk
+
+INTEGRATION SEAMS FOR NEXT AGENT
+- config/products.ts: product + offer catalog, future remote/tenant source swap
+- config/branding.ts: brand/footer/theme source, future tenant override seam
+- lib/stripe.ts + lib/usdc.ts: payment adapters isolated from UI
+- lib/crm.ts: external customer sync seam
+- lib/coupons.ts + pages/api/coupons/*: coupon policy + API boundary
+- types/*: shared contracts across embed UI, admin, and APIs
+
+ENGINEERING NOTE
+Keep customer checkout, admin operations, and provider integrations separated.
+Do not add custom Stripe card forms, multi-chain folders, or extra crypto providers.

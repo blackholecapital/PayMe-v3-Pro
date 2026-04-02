@@ -1,0 +1,6 @@
+{
+  "feePercent": 1,
+  "feeRecipient": "0x767624B4b55f65E3519DDE60cF102c74Be651F05",
+  "description": "1% transaction fee on USDC payments. Change feeRecipient to your wallet address.",
+  "notes": "This fee is deducted from the payment amount before sending to the merchant wallet. Set feePercent to 0 to disable."
+}

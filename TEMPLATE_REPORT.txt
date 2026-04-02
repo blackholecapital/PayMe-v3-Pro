@@ -1,0 +1,29 @@
+Stage 3 Report Summary
+Completed:
+- Added portable PayMe checkout module in `payme-checkout-engine/*`.
+- Implemented hosted card checkout seam, Base USDC verification seam, coupon validation/usage, CRM webhook seam, and localStorage-backed admin/payment-request management.
+- Wired skeleton app to customer checkout and admin tabs with simple blue hosted-checkout feel and Powered by PayMe footer.
+
+Base files touched:
+- `src/App.jsx`
+- `src/components/Navbar.jsx`
+- `src/styles/global.css`
+- `README.md`
+- `.env.example`
+
+Env vars required:
+- `VITE_RECEIVING_ADDRESS`
+- `VITE_WC_PROJECT_ID`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+
+Remaining stubs:
+- Serverless Stripe routes require deployment runtime mounting.
+- USDC verification endpoint is a safe stub and still needs real Base RPC/log validation.
+- CRM sync is webhook-based and intentionally thin.
+
+Recommended next hardening/polish:
+- Mount API routes in actual server runtime and persist admin/coupon/request data in DB.
+- Add Stripe webhook reconciliation into payment-request state and coupon usage truth.
+- Replace mock USDC verification with on-chain transfer receipt inspection for Base USDC.
+- Add form validation, success/cancel pages, and auth around admin.
