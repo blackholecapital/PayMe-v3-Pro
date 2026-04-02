@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import PayMeCheckout from '../payme-checkout-engine/components/PayMeCheckout.tsx';
 import BasketDemo from '../payme-checkout-engine/components/BasketDemo.tsx';
 import SinglePaymentPage from '../payme-checkout-engine/components/SinglePaymentPage.tsx';
-import { adminModules } from '../lib/spine/registry/adminModules.js';
+import { adminModules } from '../lib/spine/registry/adminModules.jsx';
 
 function currentScreen() {
   const params = new URLSearchParams(window.location.search);
