@@ -1,0 +1,97 @@
+.admin-page{ gap: 14px; }
+
+.metrics{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.metric{
+  border: 1px dashed rgba(var(--wire-rgb),0.32);
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(0,0,0,.12);
+}
+.metric .k{ opacity: .72; font-size: 11px; }
+.metric .v{ font-size: 14px; margin-top: 6px; }
+
+.admin-panel{
+  padding: 16px;
+}
+.admin-grid{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.field .k{ font-size: 11px; opacity: .72; margin-bottom: 6px; }
+.field input, .field select{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--wire-rgb),0.48);
+  background: rgba(0,0,0,.25);
+  outline: none;
+}
+.checks{ display: flex; gap: 10px; flex-wrap: wrap; }
+.chk{ display: inline-flex; gap: 8px; align-items: center; font-size: 12px; opacity: .9; }
+.chk input{ transform: translateY(1px); }
+
+.admin-actions{ margin-top: 12px; }
+
+.admin-lists{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.list-editor{
+  padding: 16px;
+}
+.list-editor textarea{
+  margin-top: 10px;
+  width: 100%;
+  min-height: 200px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--wire-rgb),0.48);
+  background: rgba(0,0,0,.25);
+  outline: none;
+  resize: vertical;
+}
+.list-editor .row{ align-items: center; }
+
+.logs{
+  padding: 16px;
+}
+.logs-table{
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+}
+.logs-row{
+  display: grid;
+  grid-template-columns: 140px 120px 70px 1fr 90px 60px;
+  gap: 10px;
+  font-size: 11px;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(var(--wire-rgb),0.28);
+}
+.logs-head{
+  opacity: .85;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.logs-row .ok{ opacity: .95; }
+.logs-row .bad{ opacity: .95; }
+.reason{ opacity: .8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+@media (max-width: 900px){
+  .metrics{ grid-template-columns: 1fr 1fr; }
+  .admin-grid{ grid-template-columns: 1fr; }
+  .admin-lists{ grid-template-columns: 1fr; }
+  .logs-row{
+    grid-template-columns: 1fr;
+  }
+  .reason{ white-space: normal; }
+}
