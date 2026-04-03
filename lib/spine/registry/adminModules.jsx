@@ -10,5 +10,5 @@ export const adminModules = [
   { key: 'requests', label: 'Payment requests', render: () => <PaymentRequestsAdmin /> },
   { key: 'coupons', label: 'Coupons', render: () => <CouponsAdmin /> },
   { key: 'subscriptions', label: 'Subscriptions', render: () => <SubscriptionsAdmin /> },
-  { key: 'crm', label: 'Light CRM', render: () => <LightCrmAdmin /> },
+  { key: 'crm', label: 'Billing', render: () => <LightCrmAdmin /> },
 ];

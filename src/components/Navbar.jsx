@@ -45,7 +45,7 @@ export default function Navbar({ mode } = {}) {
             Back
           </a>
           <div style={{ fontWeight: 800, letterSpacing: '.04em', color: '#2f7df6', textAlign: 'center' }}>
-            PayMe <span style={{ fontWeight: 600, color: '#2f7df6' }}>Payment Request</span>
+            PayMe-Pro <span style={{ fontWeight: 600, color: '#2f7df6' }}>Payment Request</span>
           </div>
         </div>
       </header>
@@ -57,7 +57,7 @@ export default function Navbar({ mode } = {}) {
   return (
     <header style={{ background: '#ffffffdd', backdropFilter: 'blur(12px)', borderBottom: '1px solid #e5ebf2' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: isMobile ? '12px 10px' : '18px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ fontWeight: 800, letterSpacing: '.04em', color: '#2f7df6', fontSize: isMobile ? 15 : undefined, flexShrink: 0 }}>PayMe</div>
+        <div style={{ fontWeight: 800, letterSpacing: '.04em', color: '#2f7df6', fontSize: isMobile ? 15 : undefined, flexShrink: 0 }}>PayMe-Pro</div>
         <nav style={{ display: 'flex', gap: isMobile ? 4 : 6, flexShrink: 1, minWidth: 0 }}>
           {NAV_ITEMS.map((item) => (
             <a
