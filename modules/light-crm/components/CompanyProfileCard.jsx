@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import SpineAdminCard from '../../../lib/spine/wrappers/SpineAdminCard.jsx';
 
 function Input({ label, value, onChange, placeholder }) {
@@ -85,10 +85,59 @@ export default function CompanyProfileCard({ company, onPatch, onSave, savedMess
           </div>
 
           <div>
-            <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Local data storage</span>
-            <div style={{ fontSize: 12, color: '#5f6c7b' }}>
-              Customer and invoice data is stored in your browser's local storage. Use the Import/Export buttons under Customers to back up or migrate data.
+            <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Local data file</span>
+            <div style={{ fontSize: 12, color: '#5f6c7b', marginBottom: 8 }}>
+              Select a local JSON file to store customer and invoice data. This keeps your records saved on your machine.
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <button type="button" onClick={async () => {
+                try {
+                  if (window.showSaveFilePicker) {
+                    const handle = await window.showSaveFilePicker({
+                      suggestedName: 'payme-billing-data.json',
+                      types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
+                    });
+                    const data = {
+                      company: JSON.parse(localStorage.getItem('payme_v2_company_v1') || '{}'),
+                      customers: JSON.parse(localStorage.getItem('payme_v2_customers_v1') || '[]'),
+                      invoiceMap: JSON.parse(localStorage.getItem('payme_v2_invoice_map_v1') || '{}'),
+                    };
+                    const writable = await handle.createWritable();
+                    await writable.write(JSON.stringify(data, null, 2));
+                    await writable.close();
+                    onPatch({ localFilePath: handle.name });
+                  } else {
+                    alert('Your browser does not support the File System Access API. Use the Import/Export buttons under Customers instead.');
+                  }
+                } catch (err) {
+                  if (err.name !== 'AbortError') console.error(err);
+                }
+              }}>Save data to file</button>
+              <button type="button" onClick={async () => {
+                try {
+                  if (window.showOpenFilePicker) {
+                    const [handle] = await window.showOpenFilePicker({
+                      types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
+                    });
+                    const file = await handle.getFile();
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    if (data.company) localStorage.setItem('payme_v2_company_v1', JSON.stringify(data.company));
+                    if (data.customers) localStorage.setItem('payme_v2_customers_v1', JSON.stringify(data.customers));
+                    if (data.invoiceMap) localStorage.setItem('payme_v2_invoice_map_v1', JSON.stringify(data.invoiceMap));
+                    onPatch({ localFilePath: handle.name });
+                    window.location.reload();
+                  } else {
+                    alert('Your browser does not support the File System Access API. Use the Import/Export buttons under Customers instead.');
+                  }
+                } catch (err) {
+                  if (err.name !== 'AbortError') console.error(err);
+                }
+              }}>Load data from file</button>
+            </div>
+            {company.localFilePath && (
+              <div style={{ fontSize: 12, color: '#166534', marginTop: 6 }}>Connected: {company.localFilePath}</div>
+            )}
           </div>
         </div>
 
