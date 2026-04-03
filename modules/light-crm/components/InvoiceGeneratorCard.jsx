@@ -31,34 +31,35 @@ export default function InvoiceGeneratorCard({
       )}
     >
       <div style={{ display: 'grid', gap: 14 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <label>
             <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Invoice #</span>
-            <input value={invoiceNumber || ''} onChange={(e) => setInvoiceNumber(e.target.value)} />
+            <input value={invoiceNumber || ''} onChange={(e) => setInvoiceNumber(e.target.value)} style={{ width: '100%', boxSizing: 'border-box' }} />
           </label>
 
           <label>
             <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Total due (USDC)</span>
-            <input value={effectiveAmount || ''} onChange={(e) => setAmount(e.target.value)} placeholder="99.00" />
+            <input value={effectiveAmount || ''} onChange={(e) => setAmount(e.target.value)} placeholder="99.00" style={{ width: '100%', boxSizing: 'border-box' }} />
           </label>
         </div>
 
         <label>
           <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Subject</span>
-          <input value={subject || ''} onChange={(e) => setSubject(e.target.value)} placeholder="Invoice for services" />
+          <input value={subject || ''} onChange={(e) => setSubject(e.target.value)} placeholder="Invoice for services" style={{ width: '100%', boxSizing: 'border-box' }} />
         </label>
 
         <div>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 8 }}>Line items</div>
           <div style={{ display: 'grid', gap: 10 }}>
             {invoiceItems.map((item, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 2fr) 110px 110px auto', gap: 8, alignItems: 'end' }}>
+              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 70px 70px auto', gap: 8, alignItems: 'end' }}>
                 <label>
                   <span style={{ display: 'block', fontSize: 12, color: '#5f6c7b', marginBottom: 4 }}>Description</span>
                   <input
                     value={item.desc || ''}
                     onChange={(e) => setInvoiceItems((rows) => rows.map((row, rowIdx) => rowIdx === idx ? { ...row, desc: e.target.value } : row))}
                     placeholder="Work item or service"
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                   />
                 </label>
                 <label>
@@ -67,6 +68,7 @@ export default function InvoiceGeneratorCard({
                     value={item.qty || ''}
                     onChange={(e) => setInvoiceItems((rows) => rows.map((row, rowIdx) => rowIdx === idx ? { ...row, qty: e.target.value } : row))}
                     placeholder="1"
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                   />
                 </label>
                 <label>
@@ -75,12 +77,14 @@ export default function InvoiceGeneratorCard({
                     value={item.unit || ''}
                     onChange={(e) => setInvoiceItems((rows) => rows.map((row, rowIdx) => rowIdx === idx ? { ...row, unit: e.target.value } : row))}
                     placeholder="99"
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                   />
                 </label>
                 <button
                   type="button"
                   onClick={() => setInvoiceItems((rows) => rows.filter((_, rowIdx) => rowIdx !== idx))}
                   disabled={invoiceItems.length === 1}
+                  style={{ whiteSpace: 'nowrap' }}
                 >
                   Remove
                 </button>

@@ -33,7 +33,7 @@ export default function App() {
     <>
       <Navbar mode={screen === 'pay' ? 'pay' : undefined} />
       {screen === 'admin' ? (
-        <div style={{ maxWidth: 1080, margin: '0 auto', padding: '24px 16px 64px', color: '#111827' }}>
+        <div style={{ maxWidth: tab === 'crm' ? 1400 : 1080, margin: '0 auto', padding: '24px 16px 64px', color: '#111827', transition: 'max-width .25s ease' }}>
           <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
             {adminModules.map((item) => (
               <button
