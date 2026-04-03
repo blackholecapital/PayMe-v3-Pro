@@ -89,7 +89,7 @@ export default function LightCrmAdmin() {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, flexWrap: 'wrap' }}>
-        <h2 style={{ color: '#2f7df6', margin: 0 }}>Billing</h2>
+        <h2 style={{ color: '#2f7df6', margin: 0 }}>PayMe-Pro</h2>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {crm.CRM_TABS.map((tab) => (
             <button
