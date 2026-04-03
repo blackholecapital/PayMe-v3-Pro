@@ -86,8 +86,29 @@ export default function LightCrmAdmin() {
     }
   }
 
+  const invoiceGenerator = (
+    <InvoiceGeneratorCard
+      invoiceNumber={crm.invoiceNumber}
+      subject={crm.subject}
+      invoiceItems={crm.invoiceItems}
+      effectiveAmount={crm.effectiveAmount}
+      generatedLink={crm.generatedLink}
+      selectedCustomer={crm.selectedCustomer}
+      setInvoiceNumber={crm.setInvoiceNumber}
+      setSubject={crm.setSubject}
+      setAmount={crm.setAmount}
+      setInvoiceItems={crm.setInvoiceItems}
+      onCreateLink={crm.createPaymentRequest}
+      onCopyLink={crm.handleCopyLink}
+      onDownloadText={crm.handleDownloadText}
+      onDownloadHtml={crm.handleDownloadHtml}
+      mailtoHref={crm.mailtoHref}
+      statusMessage={crm.statusMessage}
+    />
+  );
+
   return (
-    <div>
+    <div style={{ overflowX: 'hidden' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, flexWrap: 'wrap' }}>
         <h2 style={{ color: '#2f7df6', margin: 0 }}>PayMe-Pro</h2>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -104,30 +125,27 @@ export default function LightCrmAdmin() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start' }}>
-        <div>{renderLeftPanel()}</div>
-
-        <div>
-          <InvoiceGeneratorCard
-            invoiceNumber={crm.invoiceNumber}
-            subject={crm.subject}
-            invoiceItems={crm.invoiceItems}
-            effectiveAmount={crm.effectiveAmount}
-            generatedLink={crm.generatedLink}
-            selectedCustomer={crm.selectedCustomer}
-            setInvoiceNumber={crm.setInvoiceNumber}
-            setSubject={crm.setSubject}
-            setAmount={crm.setAmount}
-            setInvoiceItems={crm.setInvoiceItems}
-            onCreateLink={crm.createPaymentRequest}
-            onCopyLink={crm.handleCopyLink}
-            onDownloadText={crm.handleDownloadText}
-            onDownloadHtml={crm.handleDownloadHtml}
-            mailtoHref={crm.mailtoHref}
-            statusMessage={crm.statusMessage}
-          />
-        </div>
+      {/* Desktop: side-by-side | Mobile: invoice generator on top, active tab below */}
+      <div className="crm-layout" style={{ display: 'grid', gap: 16, alignItems: 'start' }}>
+        <div className="crm-left" style={{ minWidth: 0 }}>{renderLeftPanel()}</div>
+        <div className="crm-right" style={{ minWidth: 0 }}>{invoiceGenerator}</div>
       </div>
+
+      <style>{`
+        .crm-layout {
+          grid-template-columns: 1fr 1fr;
+        }
+        .crm-right { order: 0; }
+        .crm-left  { order: 0; }
+
+        @media (max-width: 768px) {
+          .crm-layout {
+            grid-template-columns: 1fr !important;
+          }
+          .crm-right { order: -1; }
+          .crm-left  { order: 0; }
+        }
+      `}</style>
     </div>
   );
 }

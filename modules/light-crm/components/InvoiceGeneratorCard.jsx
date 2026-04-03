@@ -30,8 +30,8 @@ export default function InvoiceGeneratorCard({
         </>
       )}
     >
-      <div style={{ display: 'grid', gap: 14 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div style={{ display: 'grid', gap: 14, minWidth: 0 }}>
+        <div className="inv-row-2col" style={{ display: 'grid', gap: 12 }}>
           <label>
             <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 6 }}>Invoice #</span>
             <input value={invoiceNumber || ''} onChange={(e) => setInvoiceNumber(e.target.value)} style={{ width: '100%', boxSizing: 'border-box' }} />
@@ -52,7 +52,7 @@ export default function InvoiceGeneratorCard({
           <div style={{ fontSize: 13, fontWeight: 600, color: '#5f6c7b', marginBottom: 8 }}>Line items</div>
           <div style={{ display: 'grid', gap: 10 }}>
             {invoiceItems.map((item, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 70px 70px auto', gap: 8, alignItems: 'end' }}>
+              <div key={idx} className="inv-line-item" style={{ display: 'grid', gap: 8, alignItems: 'end' }}>
                 <label>
                   <span style={{ display: 'block', fontSize: 12, color: '#5f6c7b', marginBottom: 4 }}>Description</span>
                   <input
@@ -130,10 +130,22 @@ export default function InvoiceGeneratorCard({
           </a>
         </div>
 
-        <div style={{ fontSize: 13, color: statusMessage ? '#166534' : '#5f6c7b', minHeight: 18 }}>
+        <div style={{ fontSize: 13, color: statusMessage ? '#166534' : '#5f6c7b', minHeight: 18, wordBreak: 'break-all' }}>
           {statusMessage || (generatedLink ? generatedLink : 'Create a link to generate a v3 payment request URL.')}
         </div>
       </div>
+
+      <style>{`
+        .inv-row-2col { grid-template-columns: 1fr 1fr; }
+        .inv-line-item { grid-template-columns: 1fr 70px 70px auto; }
+        @media (max-width: 768px) {
+          .inv-row-2col { grid-template-columns: 1fr !important; }
+          .inv-line-item { grid-template-columns: 1fr 60px 60px auto !important; }
+        }
+        @media (max-width: 400px) {
+          .inv-line-item { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
     </SpineAdminCard>
   );
 }
